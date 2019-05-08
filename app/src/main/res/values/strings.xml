@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Music Shop</string>
+    <string name="your_name_et">Your name</string>
+    <string name="sale_30_tv">Sale -30%</string>
+    <string name="select_item">Select Item</string>
+    <string name="order_price">Order Price</string>
+    <string name="_0">0</string>
+    <string name="dollars">$</string>
+    <string name="quantity">Quantity</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="add_to_card">Add To Cart</string>
 </resources>
