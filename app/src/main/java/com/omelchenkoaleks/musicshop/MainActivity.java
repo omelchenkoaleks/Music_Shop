@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -72,6 +73,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mGoodsName = mSpinner.getSelectedItem().toString();
         mPrice = (double) mGoodsMap.get(mGoodsName);
         priceTextView.setText("" + mPrice * quantity);
+
+        ImageView goodsImageView = findViewById(R.id.goods_iv);
+        if (mGoodsName.equals("guitar")) {
+            goodsImageView.setImageResource(R.drawable.guitar);
+        } else if (mGoodsName.equals("drums")) {
+            goodsImageView.setImageResource(R.drawable.drums);
+        } else if (mGoodsName.equals("keyboard")) {
+            goodsImageView.setImageResource(R.drawable.keyboard);
+        }
     }
 
     @Override
