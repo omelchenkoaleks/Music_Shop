@@ -31,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         priceTextView = findViewById(R.id.price_tv);
 
+        createSpinner();
+
+        createMap();
+    }
+
+    void createSpinner() {
         mSpinner = findViewById(R.id.spinner);
         mSpinner.setOnItemSelectedListener(this);
 
@@ -41,14 +47,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mSpinnerAdapter = new ArrayAdapter(
                 this, android.R.layout.simple_spinner_item, mSpinnerArrayList);
+        // устанавливаем выпадающий список
         mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // привязываем адаптер к spinner
         mSpinner.setAdapter(mSpinnerAdapter);
+    }
 
+    void createMap() {
         mGoodsMap = new HashMap();
         mGoodsMap.put("guitar", 500.0);
         mGoodsMap.put("drums", 3050.0);
         mGoodsMap.put("keyboard", 5500.0);
-
     }
 
     public void increaseQuantity(View view) {
@@ -75,13 +84,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         priceTextView.setText("" + mPrice * quantity);
 
         ImageView goodsImageView = findViewById(R.id.goods_iv);
-        if (mGoodsName.equals("guitar")) {
-            goodsImageView.setImageResource(R.drawable.guitar);
-        } else if (mGoodsName.equals("drums")) {
-            goodsImageView.setImageResource(R.drawable.drums);
-        } else if (mGoodsName.equals("keyboard")) {
-            goodsImageView.setImageResource(R.drawable.keyboard);
+        switch (mGoodsName) {
+            case "guitar":
+                goodsImageView.setImageResource(R.drawable.guitar);
+                break;
+            case "drums":
+                goodsImageView.setImageResource(R.drawable.drums);
+                break;
+            case "keyboard":
+                goodsImageView.setImageResource(R.drawable.keyboard);
+                break;
+            default:
+                goodsImageView.setImageResource(R.drawable.no_googs);
+                break;
         }
+
+
+        // выбор при использовании if else
+//        if (mGoodsName.equals("guitar")) {
+//            goodsImageView.setImageResource(R.drawable.guitar);
+//        } else if (mGoodsName.equals("drums")) {
+//            goodsImageView.setImageResource(R.drawable.drums);
+//        } else if (mGoodsName.equals("keyboard")) {
+//            goodsImageView.setImageResource(R.drawable.keyboard);
+//        }
     }
 
     @Override
