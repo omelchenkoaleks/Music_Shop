@@ -1,5 +1,6 @@
 package com.omelchenkoaleks.musicshop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -114,6 +115,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         order.userName = mUserNameEditText.getText().toString();
         order.goodsName = mGoodsName;
         order.quantity = quantity;
+        order.price = mPrice;
         order.orderPrice = quantity * mPrice;
+
+        Intent orderIntent = new Intent(this, OrderActivity.class);
+        orderIntent.putExtra("userNameForIntent", order.userName);
+        orderIntent.putExtra("goodsNameForIntent", order.goodsName);
+        orderIntent.putExtra("quantityForIntent", order.quantity);
+        orderIntent.putExtra("priceForIntent", order.price);
+        orderIntent.putExtra("orderPriceForIntent", order.orderPrice);
+
+        startActivity(orderIntent);
     }
 }
