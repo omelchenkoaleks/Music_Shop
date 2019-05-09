@@ -1,9 +1,11 @@
 package com.omelchenkoaleks.musicshop;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,14 +24,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     HashMap mGoodsMap;
     String mGoodsName;
     double mPrice;
-    TextView priceTextView;
+    TextView mPriceTextView;
+
+    EditText mUserNameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        priceTextView = findViewById(R.id.price_tv);
+        mPriceTextView = findViewById(R.id.price_tv);
+        mUserNameEditText = findViewById(R.id.name_et);
 
         createSpinner();
 
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         quantity = quantity + 1;
         TextView quantityTextView = findViewById(R.id.quantity_tv);
         quantityTextView.setText("" + quantity);
-        priceTextView.setText("" + mPrice * quantity);
+        mPriceTextView.setText("" + mPrice * quantity);
     }
 
     public void decreaseQuantity(View view) {
@@ -74,14 +79,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         TextView quantityTextView = findViewById(R.id.quantity_tv);
         quantityTextView.setText("" + quantity);
-        priceTextView.setText("" + mPrice * quantity);
+        mPriceTextView.setText("" + mPrice * quantity);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mGoodsName = mSpinner.getSelectedItem().toString();
         mPrice = (double) mGoodsMap.get(mGoodsName);
-        priceTextView.setText("" + mPrice * quantity);
+        mPriceTextView.setText("" + mPrice * quantity);
 
         ImageView goodsImageView = findViewById(R.id.goods_iv);
         switch (mGoodsName) {
@@ -98,19 +103,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 goodsImageView.setImageResource(R.drawable.no_googs);
                 break;
         }
-
-
-        // выбор при использовании if else
-//        if (mGoodsName.equals("guitar")) {
-//            goodsImageView.setImageResource(R.drawable.guitar);
-//        } else if (mGoodsName.equals("drums")) {
-//            goodsImageView.setImageResource(R.drawable.drums);
-//        } else if (mGoodsName.equals("keyboard")) {
-//            goodsImageView.setImageResource(R.drawable.keyboard);
-//        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    public void addToCart(View view) {
+        Order order = new Order();
+        order.userName = mUserNameEditText.getText().toString();
+        order.goodsName = mGoodsName;
+        order.quantity = quantity;
+        order.orderPrice = quantity * mPrice;
     }
 }

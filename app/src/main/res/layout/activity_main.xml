@@ -155,7 +155,8 @@
         android:layout_marginTop="40dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/add_to_card"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:onClick="addToCart"/>
 
 
 </LinearLayout>
